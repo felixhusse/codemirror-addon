@@ -25,7 +25,23 @@ import com.vaadin.ui.AbstractJavaScriptComponent;
  * @author felix.husse
  */
 @JavaScript({"vaadin://codemirror/codemirror-compressed.js","codemirror-connector.js"})
-@StyleSheet({"vaadin://codemirror/codemirror.css","vaadin://codemirror/theme/ambiance.css","vaadin://codemirror/fullscreen.css"})
+@StyleSheet({"vaadin://codemirror/codemirror.css","vaadin://codemirror/theme/ambiance.css","vaadin://codemirror/theme/mbo.css","vaadin://codemirror/fullscreen.css"})
 public class CodeMirror extends AbstractJavaScriptComponent{
+    
+    
+    public void setCode(String value) {
+        getState().codeString = value;
+    }
+    
+    public String getCode() {
+        return getState().codeString;
+    }
+
+    @Override
+    protected CodeMirrorState getState() {
+        return (CodeMirrorState) super.getState(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
 }

@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
+    
+    var codemirror;
     var e = this.getElement();
     
     this.onStateChange = function() {
+        var state = this.getState();
+        var codeString = state.codeString;
         e.innerHTML = "<div id='codemirror-addon'></div>";
-        var myCodeMirror = CodeMirror(document.getElementById('codemirror-addon'), {
-            value: "function myScript(){return 100;}",
+        codemirror = CodeMirror(document.getElementById('codemirror-addon'), {
+            value: codeString,
             mode:  "javascript",
             lineNumbers: true,
-            theme: "ambiance",
+            theme: "mbo",
             extraKeys: {
               "F11": function(cm) {
                 cm.setOption("fullScreen", !cm.getOption("fullScreen"));
@@ -34,5 +38,8 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
           });
     };
     
+    this.loadCode = function(codeString) {
+        
+    }
 };
 
