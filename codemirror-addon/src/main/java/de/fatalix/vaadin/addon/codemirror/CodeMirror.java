@@ -27,6 +27,12 @@ import com.vaadin.ui.AbstractJavaScriptComponent;
 @JavaScript({"vaadin://codemirror/codemirror-compressed.js","codemirror-connector.js"})
 @StyleSheet({"vaadin://codemirror/codemirror.css","vaadin://codemirror/theme/ambiance.css","vaadin://codemirror/theme/mbo.css","vaadin://codemirror/fullscreen.css"})
 public class CodeMirror extends AbstractJavaScriptComponent{
+
+    public CodeMirror() {
+        super();
+        
+    }
+    
     
     
     public void setCode(String value) {

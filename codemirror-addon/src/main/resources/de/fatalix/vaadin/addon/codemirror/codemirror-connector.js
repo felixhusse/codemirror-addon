@@ -14,32 +14,44 @@
  * limitations under the License.
  */
 window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
-    
+
+    var INIT = "init";
+    var LOAD = "load";
+
     var codemirror;
     var e = this.getElement();
-    
+
     this.onStateChange = function() {
         var state = this.getState();
-        var codeString = state.codeString;
-        e.innerHTML = "<div id='codemirror-addon'></div>";
+        var delay;
+        e.innerHTML = e.innerHTML + "<div id='codemirror-addon'></div>";
         codemirror = CodeMirror(document.getElementById('codemirror-addon'), {
-            value: codeString,
-            mode:  "javascript",
+            value: state.codeString,
+            mode: "javascript",
             lineNumbers: true,
             theme: "mbo",
             extraKeys: {
-              "F11": function(cm) {
-                cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-              },
-              "Esc": function(cm) {
-                if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
-              }
+                "F11": function(cm) {
+                    cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                },
+                "Esc": function(cm) {
+                    if (cm.getOption("fullScreen"))
+                        cm.setOption("fullScreen", false);
+                }
             }
-          });
+        });
+        codemirror.on("change", function() {
+            clearTimeout(delay);
+            delay = setTimeout(updatePreview, 300);
+        });
+
+        function updatePreview() {
+            var value = codemirror.getValue();
+            state.codeString = value;
+        }
+
+
     };
-    
-    this.loadCode = function(codeString) {
-        
-    }
+
 };
 

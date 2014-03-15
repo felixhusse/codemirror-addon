@@ -9,10 +9,14 @@ import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 import de.fatalix.vaadin.addon.codemirror.CodeMirror;
 
 
@@ -63,16 +67,24 @@ public class DemoUI extends UI {
                 public void buttonClick(Button.ClickEvent event) {
                     codeMirror.setCode(exampleCode2);
                     
-//                    Window dialog = new Window("Code:");
-//                    dialog.setModal(true);
-//                    dialog.setContent(new VerticalLayout(new Label(codeMirror.getCode(), ContentMode.PREFORMATTED)));
-//                    dialog.setHeight(400,Unit.PIXELS);
-//                    dialog.setWidth(500,Unit.PIXELS);
-//                    UI.getCurrent().addWindow(dialog);
+
                 }
             });
             
-            layout.addComponents(codeMirror,button);
+            Button showCode = new Button("Show Code", new Button.ClickListener() {
+
+                @Override
+                public void buttonClick(Button.ClickEvent event) {
+                    Window dialog = new Window("Code:");
+                    dialog.setModal(true);
+                    dialog.setContent(new VerticalLayout(new Label(codeMirror.getCode(), ContentMode.PREFORMATTED)));
+                    dialog.setHeight(400,Unit.PIXELS);
+                    dialog.setWidth(500,Unit.PIXELS);
+                    UI.getCurrent().addWindow(dialog);
+                }
+            });
+            HorizontalLayout buttonLayout = new HorizontalLayout(button,showCode);
+            layout.addComponents(codeMirror,buttonLayout);
             layout.setExpandRatio(codeMirror, 1.0f);
             layout.setComponentAlignment(codeMirror, Alignment.MIDDLE_CENTER);
             layout.setSizeFull();
