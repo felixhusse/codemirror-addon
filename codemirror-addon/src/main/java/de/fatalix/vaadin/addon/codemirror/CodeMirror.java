@@ -19,6 +19,9 @@ package de.fatalix.vaadin.addon.codemirror;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.ui.AbstractJavaScriptComponent;
+import com.vaadin.ui.JavaScriptFunction;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  *
@@ -27,20 +30,30 @@ import com.vaadin.ui.AbstractJavaScriptComponent;
 @JavaScript({"vaadin://codemirror/codemirror-compressed.js","codemirror-connector.js"})
 @StyleSheet({"vaadin://codemirror/codemirror.css","vaadin://codemirror/theme/ambiance.css","vaadin://codemirror/theme/mbo.css","vaadin://codemirror/fullscreen.css"})
 public class CodeMirror extends AbstractJavaScriptComponent{
-
+    private String codeValue;
     public CodeMirror() {
         super();
-        
+        addFunction("onBlur", new JavaScriptFunction() {
+
+            @Override
+            public void call(JSONArray arguments) throws JSONException {
+                codeValue = arguments.getString(0);
+            }
+        });
     }
     
     
     
     public void setCode(String value) {
-        getState().codeString = value;
+        codeValue = value;
+        CodeMirrorData data = new CodeMirrorData();
+        data.code = value;
+        data.state = "LOAD";
+        getState().codeData = data;
     }
     
     public String getCode() {
-        return getState().codeString;
+        return codeValue;
     }
 
     @Override

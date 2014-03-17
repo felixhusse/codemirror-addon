@@ -20,37 +20,36 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
 
     var codemirror;
     var e = this.getElement();
-
+    var self = this;
+    
     this.onStateChange = function() {
         var state = this.getState();
         var delay;
-        e.innerHTML = e.innerHTML + "<div id='codemirror-addon'></div>";
-        codemirror = CodeMirror(document.getElementById('codemirror-addon'), {
-            value: state.codeString,
-            mode: "javascript",
-            lineNumbers: true,
-            theme: "mbo",
-            extraKeys: {
-                "F11": function(cm) {
-                    cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-                },
-                "Esc": function(cm) {
-                    if (cm.getOption("fullScreen"))
-                        cm.setOption("fullScreen", false);
+        if (state.codeData.state === 'LOAD') {
+            e.innerHTML = e.innerHTML + "<div id='codemirror-addon'></div>";
+            codemirror = CodeMirror(document.getElementById('codemirror-addon'), {
+                value: state.codeData.code,
+                mode: "javascript",
+                lineNumbers: true,
+                theme: "mbo",
+                extraKeys: {
+                    "F11": function(cm) {
+                        cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                    },
+                    "Esc": function(cm) {
+                        if (cm.getOption("fullScreen"))
+                            cm.setOption("fullScreen", false);
+                    }
                 }
-            }
-        });
-        codemirror.on("change", function() {
-            clearTimeout(delay);
-            delay = setTimeout(updatePreview, 300);
-        });
+            });
 
-        function updatePreview() {
-            var value = codemirror.getValue();
-            state.codeString = value;
+            codemirror.on("blur", function() {
+               var value = codemirror.getValue();
+               self.onBlur(value);
+            });    
         }
-
-
+        
+        
     };
 
 };

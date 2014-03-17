@@ -16,13 +16,11 @@
 
 package de.fatalix.vaadin.addon.codemirror;
 
-import com.vaadin.shared.ui.JavaScriptComponentState;
-
 /**
  *
- * @author felix.husse
+ * @author felix
  */
-public class CodeMirrorState extends JavaScriptComponentState{
-
-    public CodeMirrorData codeData;
+public class CodeMirrorData {
+    public String state;
+    public String code;
 }
