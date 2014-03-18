@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
-
-    var INIT = "init";
-    var LOAD = "load";
-
     var codemirror;
     var e = this.getElement();
     var self = this;
@@ -31,7 +27,7 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
                     value: state.codeData.code,
                     mode: "javascript",
                     lineNumbers: true,
-                    theme: "mbo",
+                    theme: "default",
                     extraKeys: {
                         "F11": function(cm) {
                             cm.setOption("fullScreen", !cm.getOption("fullScreen"));
@@ -50,8 +46,35 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
             }
             else {
                 codemirror.setValue(state.codeData.code);
+            }   
+        }
+        else if (state.codeData.state === 'THEME') {
+            if (typeof codemirror == 'undefined') {
+                e.innerHTML = e.innerHTML + "<div id='cm-addon-"+state.codeData.id+"'></div>";
+                codemirror = CodeMirror(document.getElementById('cm-addon-'+state.codeData.id), {
+                    value: "",
+                    mode: "javascript",
+                    lineNumbers: true,
+                    theme: state.codeData.theme,
+                    extraKeys: {
+                        "F11": function(cm) {
+                            cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                        },
+                        "Esc": function(cm) {
+                            if (cm.getOption("fullScreen"))
+                                cm.setOption("fullScreen", false);
+                        }
+                    }
+                });
+
+                codemirror.on("blur", function() {
+                   var value = codemirror.getValue();
+                   self.onBlur(value);
+                });
             }
-                
+            else {
+                codemirror.setOption("theme",state.codeData.theme);
+            }
         }
         
         

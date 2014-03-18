@@ -7,17 +7,23 @@ import javax.servlet.annotation.WebServlet;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.data.Property;
+import com.vaadin.event.FieldEvents;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import de.fatalix.vaadin.addon.codemirror.CodeMirror;
+import de.fatalix.vaadin.addon.codemirror.CodeMirrorTheme;
+import java.util.Arrays;
 
 
 @Theme("demo")
@@ -43,6 +49,9 @@ public class DemoUI extends UI {
                                                 "  }\n" +
                                                 "  return find(1, \"1\");\n" +
                                                 "}";
+    
+    private boolean changeFlag = false;
+    
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
     public static class Servlet extends VaadinServlet {
@@ -65,9 +74,14 @@ public class DemoUI extends UI {
 
                 @Override
                 public void buttonClick(Button.ClickEvent event) {
-                    codeMirror.setCode(exampleCode2);
-                    
-
+                    if (changeFlag) {
+                        codeMirror.setCode(exampleCode);
+                        changeFlag = false;
+                    }
+                    else {
+                        codeMirror.setCode(exampleCode2);
+                        changeFlag = true;
+                    }
                 }
             });
             
@@ -83,8 +97,31 @@ public class DemoUI extends UI {
                     UI.getCurrent().addWindow(dialog);
                 }
             });
-            HorizontalLayout buttonLayout = new HorizontalLayout(button,showCode);
-            layout.addComponents(codeMirror,buttonLayout);
+            
+            final ComboBox themeSelect = new ComboBox(null,Arrays.asList(CodeMirrorTheme.values()));
+            themeSelect.setValue(CodeMirrorTheme.DEFAULT);
+//            themeSelect.addBlurListener(new FieldEvents.BlurListener() {
+//
+//                @Override
+//                public void blur(FieldEvents.BlurEvent event) {
+//                    CodeMirrorTheme theme = (CodeMirrorTheme)themeSelect.getValue();
+//                    Notification.show("Value Changed Event:" + theme);
+//                    codeMirror.setTheme(theme);
+//                }
+//            });
+            themeSelect.setImmediate(true);
+            themeSelect.addValueChangeListener(new Property.ValueChangeListener() {
+
+                @Override
+                public void valueChange(Property.ValueChangeEvent event) {
+                    CodeMirrorTheme theme = (CodeMirrorTheme)event.getProperty().getValue();
+                    Notification.show(theme.getThemeName());
+                    codeMirror.setTheme(theme);
+                }
+            });
+            
+            HorizontalLayout buttonLayout = new HorizontalLayout(button,showCode,themeSelect);
+            layout.addComponents(buttonLayout,codeMirror);
             layout.setExpandRatio(codeMirror, 1.0f);
             layout.setComponentAlignment(codeMirror, Alignment.MIDDLE_CENTER);
             layout.setSizeFull();

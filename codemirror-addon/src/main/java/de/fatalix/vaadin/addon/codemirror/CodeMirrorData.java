@@ -22,6 +22,7 @@ package de.fatalix.vaadin.addon.codemirror;
  */
 public class CodeMirrorData {
     public String state;
+    public String theme;
     public String code;
     public int id;
 }

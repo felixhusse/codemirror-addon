@@ -28,7 +28,9 @@ import org.json.JSONException;
  * @author felix.husse
  */
 @JavaScript({"vaadin://codemirror/codemirror-compressed.js","codemirror-connector.js"})
-@StyleSheet({"vaadin://codemirror/codemirror.css","vaadin://codemirror/theme/ambiance.css","vaadin://codemirror/theme/mbo.css","vaadin://codemirror/fullscreen.css"})
+@StyleSheet({"vaadin://codemirror/codemirror.css",
+    "vaadin://codemirror/theme/themes.css",
+    "vaadin://codemirror/fullscreen.css"})
 public class CodeMirror extends AbstractJavaScriptComponent{
     private static int componentCount = 0;
     
@@ -59,10 +61,19 @@ public class CodeMirror extends AbstractJavaScriptComponent{
         getState().codeData = data;
     }
     
+    public void setTheme(CodeMirrorTheme codeMirrorTheme) {
+        CodeMirrorData data = new CodeMirrorData();
+        data.state = "THEME";
+        data.id = componentId;
+        data.theme = codeMirrorTheme.getThemeName();
+        getState().codeData = data;
+    }
+    
     public String getCode() {
         return codeValue;
     }
-
+    
+    
     @Override
     protected CodeMirrorState getState() {
         return (CodeMirrorState) super.getState(); //To change body of generated methods, choose Tools | Templates.
