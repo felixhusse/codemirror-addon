@@ -30,9 +30,15 @@ import org.json.JSONException;
 @JavaScript({"vaadin://codemirror/codemirror-compressed.js","codemirror-connector.js"})
 @StyleSheet({"vaadin://codemirror/codemirror.css","vaadin://codemirror/theme/ambiance.css","vaadin://codemirror/theme/mbo.css","vaadin://codemirror/fullscreen.css"})
 public class CodeMirror extends AbstractJavaScriptComponent{
+    private static int componentCount = 0;
+    
     private String codeValue;
+    private final int componentId;
+    
     public CodeMirror() {
         super();
+        componentId = componentCount;
+        componentCount++;
         addFunction("onBlur", new JavaScriptFunction() {
 
             @Override
@@ -48,6 +54,7 @@ public class CodeMirror extends AbstractJavaScriptComponent{
         codeValue = value;
         CodeMirrorData data = new CodeMirrorData();
         data.code = value;
+        data.id = componentId;
         data.state = "LOAD";
         getState().codeData = data;
     }

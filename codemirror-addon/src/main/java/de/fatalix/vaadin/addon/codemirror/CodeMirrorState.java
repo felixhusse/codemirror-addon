@@ -23,6 +23,6 @@ import com.vaadin.shared.ui.JavaScriptComponentState;
  * @author felix.husse
  */
 public class CodeMirrorState extends JavaScriptComponentState{
-
+    
     public CodeMirrorData codeData;
 }

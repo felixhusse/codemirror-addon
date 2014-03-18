@@ -24,29 +24,34 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
     
     this.onStateChange = function() {
         var state = this.getState();
-        var delay;
         if (state.codeData.state === 'LOAD') {
-            e.innerHTML = e.innerHTML + "<div id='codemirror-addon'></div>";
-            codemirror = CodeMirror(document.getElementById('codemirror-addon'), {
-                value: state.codeData.code,
-                mode: "javascript",
-                lineNumbers: true,
-                theme: "mbo",
-                extraKeys: {
-                    "F11": function(cm) {
-                        cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-                    },
-                    "Esc": function(cm) {
-                        if (cm.getOption("fullScreen"))
-                            cm.setOption("fullScreen", false);
+            if (typeof codemirror == 'undefined') {
+                e.innerHTML = e.innerHTML + "<div id='cm-addon-"+state.codeData.id+"'></div>";
+                codemirror = CodeMirror(document.getElementById('cm-addon-'+state.codeData.id), {
+                    value: state.codeData.code,
+                    mode: "javascript",
+                    lineNumbers: true,
+                    theme: "mbo",
+                    extraKeys: {
+                        "F11": function(cm) {
+                            cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                        },
+                        "Esc": function(cm) {
+                            if (cm.getOption("fullScreen"))
+                                cm.setOption("fullScreen", false);
+                        }
                     }
-                }
-            });
+                });
 
-            codemirror.on("blur", function() {
-               var value = codemirror.getValue();
-               self.onBlur(value);
-            });    
+                codemirror.on("blur", function() {
+                   var value = codemirror.getValue();
+                   self.onBlur(value);
+                });    
+            }
+            else {
+                codemirror.setValue(state.codeData.code);
+            }
+                
         }
         
         
