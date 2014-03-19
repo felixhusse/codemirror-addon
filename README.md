@@ -1,16 +1,12 @@
-# TimelineJS Add-on for Vaadin 7
+# CodeMirror Add-on for Vaadin 7
 
-Timelinejs is an UI component add-on for Vaadin 7 based on the Timelinejs Java Script library ([timeline.js](http://timeline.knightlab.com/)).
+CodeMirror is an UI component add-on for Vaadin 7 based on the CodeMirror Java Script library ([CodeMirror](http://codemirror.net)). CodeMirror version in use is 3.22.
 
+# Features/Highlights
+- setCode & getCode (wow)
+- nearly all CodeMirror Themes included
+- F11 while focus on CodeMirror will expand to fullscreen (Fullscreen Addon)
 
-
-## Online demo
-
-Currently no add-on demo available. See pure JS demo at [timeline.js](http://timeline.knightlab.com/).
-
-## Download release
-
-Official releases of this add-on are available at Vaadin Directory. For Maven instructions, download and reviews, go to http://vaadin.com/addon/network-graph
 
 ## Building and running demo
 
@@ -53,13 +49,11 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
 
 ## Release notes
 
-### Version 1.0.0-SNAPSHOT
-- ...
-- ...
+### Version 0.9.0-SNAPSHOT
+- 
 
 ## Roadmap
 
-Currently no roadmap planned
 
 ## Issue tracking
 
@@ -79,12 +73,5 @@ Contributions are welcome, but there are no guarantees that they are accepted as
 
 Add-on is distributed under Apache License 2.0. For license terms, see LICENSE.txt.
 
-# Developer Guide
 
-## Getting started
 
-For a more comprehensive example, see src/test/java/org/vaadin/template/demo/DemoUI.java
-
-## API
-
-NetworkGraph JavaDoc is currently not available online
