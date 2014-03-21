@@ -69,6 +69,14 @@ public class CodeMirror extends AbstractJavaScriptComponent{
         getState().codeData = data;
     }
     
+    public void setLanguage(CodeMirrorLanguage codeMirrorLanguage) {
+        CodeMirrorData data = new CodeMirrorData();
+        data.state = "MODE";
+        data.id = componentId;
+        data.mode = codeMirrorLanguage.getLanguageName();
+        getState().codeData = data;
+    }
+    
     public String getCode() {
         return codeValue;
     }

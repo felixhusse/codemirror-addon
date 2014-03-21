@@ -18,12 +18,30 @@ package de.fatalix.vaadin.addon.codemirror;
 
 /**
  *
- * @author felix
+ * @author felix.husse
  */
-public class CodeMirrorData {
-    public String state;
-    public String theme;
-    public String mode;
-    public String code;
-    public int id;
+public enum CodeMirrorLanguage {
+    DEFAULT("javascript"),
+    XML("application/xml"),
+    HTML("text/html"),
+    SQL("text/x-sql"),
+    JAVA("text/x-java");
+    
+    
+    private final String languageName;
+
+    private CodeMirrorLanguage(String languageName) {
+        this.languageName = languageName;
+    }
+    
+    public String getLanguageName() {
+        return languageName;
+    }
+
+    @Override
+    public String toString() {
+        return languageName;
+    }
+    
+    
 }
