@@ -17,68 +17,45 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
     var codemirror;
     var e = this.getElement();
     var self = this;
-    
+
     this.onStateChange = function() {
         var state = this.getState();
+        initCodeMirror(state.codeData.id);
         if (state.codeData.state === 'LOAD') {
-            if (typeof codemirror == 'undefined') {
-                e.innerHTML = e.innerHTML + "<div id='cm-addon-"+state.codeData.id+"'></div>";
-                codemirror = CodeMirror(document.getElementById('cm-addon-'+state.codeData.id), {
-                    value: state.codeData.code,
-                    mode: "javascript",
-                    lineNumbers: true,
-                    theme: "default",
-                    extraKeys: {
-                        "F11": function(cm) {
-                            cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-                        },
-                        "Esc": function(cm) {
-                            if (cm.getOption("fullScreen"))
-                                cm.setOption("fullScreen", false);
-                        }
-                    }
-                });
-
-                codemirror.on("blur", function() {
-                   var value = codemirror.getValue();
-                   self.onBlur(value);
-                });    
-            }
-            else {
-                codemirror.setValue(state.codeData.code);
-            }   
+            codemirror.setValue(state.codeData.code);
         }
         else if (state.codeData.state === 'THEME') {
-            if (typeof codemirror == 'undefined') {
-                e.innerHTML = e.innerHTML + "<div id='cm-addon-"+state.codeData.id+"'></div>";
-                codemirror = CodeMirror(document.getElementById('cm-addon-'+state.codeData.id), {
-                    value: "",
-                    mode: "javascript",
-                    lineNumbers: true,
-                    theme: state.codeData.theme,
-                    extraKeys: {
-                        "F11": function(cm) {
-                            cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-                        },
-                        "Esc": function(cm) {
-                            if (cm.getOption("fullScreen"))
-                                cm.setOption("fullScreen", false);
-                        }
-                    }
-                });
-
-                codemirror.on("blur", function() {
-                   var value = codemirror.getValue();
-                   self.onBlur(value);
-                });
-            }
-            else {
-                codemirror.setOption("theme",state.codeData.theme);
-            }
+            codemirror.setOption("theme", state.codeData.theme);
         }
-        
-        
+
+
     };
+
+    initCodeMirror = function(id) {
+        if (typeof codemirror === 'undefined') {
+            e.innerHTML = e.innerHTML + "<div id='cm-addon-" + id + "'></div>";
+            codemirror = CodeMirror(document.getElementById('cm-addon-' + id), {
+                value: "",
+                mode: "javascript",
+                lineNumbers: true,
+                theme: "default",
+                extraKeys: {
+                    "F11": function(cm) {
+                        cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                    },
+                    "Esc": function(cm) {
+                        if (cm.getOption("fullScreen"))
+                            cm.setOption("fullScreen", false);
+                    }
+                }
+            });
+
+            codemirror.on("blur", function() {
+                var value = codemirror.getValue();
+                self.onBlur(value);
+            });
+        }
+    }
 
 };
 
