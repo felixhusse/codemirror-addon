@@ -29,38 +29,6 @@
         <Vaadin-Addon>${artifactId}-${project.version}.jar</Vaadin-Addon>
     </properties>
 
-    <organization>
-        <name>fatalix</name>
-        <url>https://github.com/elomagic/network-graph/</url>
-    </organization>
-
-    <scm>
-        <url>https://github.com/elomagic/network-graph.git</url>
-        <connection>scm:git:https://github.com/elomagic/network-graph.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:/elomagic/network-graph.git</developerConnection>
-        <tag>NetworkGraph add-on for Vaadin</tag>
-    </scm>
-
-    <developers>
-        <developer>
-            <id>fatalix</id>
-            <name>Felix Husse</name>
-        </developer>
-    </developers>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/felixhusse/network-graph/issues</url>
-    </issueManagement>
-
-    <licenses>
-        <license>
-            <name>Apache 2</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
     <repositories>
         <repository>
             <id>vaadin-addons</id>
