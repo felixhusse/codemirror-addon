@@ -8,6 +8,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.data.Property;
+import com.vaadin.event.FieldEvents;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -69,6 +70,12 @@ public class DemoUI extends UI {
             codeMirror.setHeight(500, Unit.PIXELS);
             codeMirror.setWidth(600, Unit.PIXELS);
             codeMirror.setCode(exampleCode);
+            codeMirror.addBlurListener(new FieldEvents.BlurListener() {
+                @Override
+                public void blur(FieldEvents.BlurEvent event) {
+                    Notification.show("Code Changed!",((CodeMirror)event.getComponent()).getCode(), Notification.Type.TRAY_NOTIFICATION);
+                }
+            });
             
             Button button = new Button("Load some code", new Button.ClickListener() {
 

@@ -18,8 +18,11 @@ package de.fatalix.vaadin.addon.codemirror;
 
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
+import com.vaadin.event.FieldEvents;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.JavaScriptFunction;
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -37,6 +40,8 @@ public class CodeMirror extends AbstractJavaScriptComponent{
     private String codeValue;
     private final int componentId;
     
+    private List<FieldEvents.BlurListener> blurListeners = new ArrayList<>();
+    
     public CodeMirror() {
         super();
         componentId = componentCount;
@@ -46,6 +51,9 @@ public class CodeMirror extends AbstractJavaScriptComponent{
             @Override
             public void call(JSONArray arguments) throws JSONException {
                 codeValue = arguments.getString(0);
+                for (FieldEvents.BlurListener listener : blurListeners) {
+                    listener.blur(new FieldEvents.BlurEvent(CodeMirror.this));
+                }
             }
         });
     }
@@ -81,10 +89,17 @@ public class CodeMirror extends AbstractJavaScriptComponent{
         return codeValue;
     }
     
+    public void addBlurListener(FieldEvents.BlurListener listener) {
+        blurListeners.add(listener);
+    }
+    
+    public void removeBlurListener(FieldEvents.BlurListener listener) {
+        blurListeners.remove(listener);
+    }
     
     @Override
     protected CodeMirrorState getState() {
-        return (CodeMirrorState) super.getState(); //To change body of generated methods, choose Tools | Templates.
+        return (CodeMirrorState) super.getState();
     }
     
     
