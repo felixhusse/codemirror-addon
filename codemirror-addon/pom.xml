@@ -6,7 +6,7 @@
     <artifactId>codmirror-addon</artifactId>
     <packaging>jar</packaging>
 
-    <name>Codemirror Add-on ${project.version}</name>
+    <name>Codemirror Add-on</name>
     <description>Codemirror Add-on for Vaadin 7 based on the "Codemirror" Java Script library</description>
 	
     <parent>
@@ -23,10 +23,10 @@
         <!-- ZIP Manifest fields -->
         <Implementation-Version>${project.version}</Implementation-Version>
         <!-- Must not change this because of the Directory -->
-        <Implementation-Title>${project.name}</Implementation-Title>
+        <Implementation-Title>Codemirror Add-on</Implementation-Title>
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
         <Vaadin-License-Title>Apache License 2.0</Vaadin-License-Title>
-        <Vaadin-Addon>${artifactId}-${project.version}.jar</Vaadin-Addon>
+        <Vaadin-Addon>${artifactId}.jar</Vaadin-Addon>
     </properties>
 
     <repositories>
@@ -100,6 +100,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.3.1</version>
                 <configuration>
+                    <finalName>${artifactId}</finalName>
                     <archive>
                         <index>true</index>
                         <manifest>
@@ -111,6 +112,7 @@
                             <Vaadin-Package-Version>1</Vaadin-Package-Version>
                             <Vaadin-License-Title>${Vaadin-License-Title}</Vaadin-License-Title>
                         </manifestEntries>
+                        
                     </archive>
                 </configuration>
             </plugin>
@@ -127,6 +129,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <finalName>${artifactId}</finalName>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -141,6 +146,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <finalName>${artifactId}</finalName>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -148,6 +156,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
+                    <finalName>${artifactId}</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
                         <descriptor>assembly/assembly.xml</descriptor>
