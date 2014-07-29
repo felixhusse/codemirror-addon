@@ -10,7 +10,7 @@
 	<parent>
         <artifactId>codemirror-addon-parent</artifactId>
         <groupId>de.fatalix</groupId>
-        <version>0.9.1</version>
+        <version>0.9.2</version>
     </parent>
 	
     <properties>
