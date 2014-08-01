@@ -69,6 +69,7 @@ public class DemoUI extends UI {
             final CodeMirror codeMirror = new CodeMirror();
             codeMirror.setHeight(500, Unit.PIXELS);
             codeMirror.setWidth(600, Unit.PIXELS);
+            codeMirror.setTheme(CodeMirrorTheme.THE_MATRIX);
             codeMirror.setCode(exampleCode);
             codeMirror.addBlurListener(new FieldEvents.BlurListener() {
                 @Override

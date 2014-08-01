@@ -22,8 +22,8 @@ package de.fatalix.vaadin.addon.codemirror;
  */
 public class CodeMirrorData {
     public String state;
-    public String theme;
-    public String mode;
-    public String code;
+    public String theme = "default";
+    public String mode = "javascript";
+    public String code = "//please start to code";
     public int id;
 }

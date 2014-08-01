@@ -17,21 +17,34 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
     var codemirror;
     var e = this.getElement();
     var self = this;
-
+    var currentCodeData;
+    
     this.onStateChange = function() {
         var state = this.getState();
+        
         initCodeMirror(state.codeData.id);
-        if (state.codeData.state === 'LOAD') {
-            codemirror.setValue(state.codeData.code);
+        modifyCodeMirrorState(state.codeData);
+        
+    };
+    
+    modifyCodeMirrorState = function(codeData) {
+        if (typeof currentCodeData !== 'undefined') {
+            if (currentCodeData.code != codeData.code) {
+                codemirror.setValue(codeData.code);
+            }
+            if (currentCodeData.theme != codeData.theme) {
+                codemirror.setOption("theme", codeData.theme);
+            }
+            if (currentCodeData.mode != codeData.mode) {
+                codemirror.setOption("mode", codeData.mode);
+            }
         }
-        else if (state.codeData.state === 'THEME') {
-            codemirror.setOption("theme", state.codeData.theme);
+        else {
+            codemirror.setValue(codeData.code);
+            codemirror.setOption("theme", codeData.theme);
+            codemirror.setOption("mode", codeData.mode);
         }
-        else if (state.codeData.state === 'MODE') {
-            codemirror.setOption("mode", state.codeData.mode);
-            //CodeMirror.autoLoadMode(codemirror,state.codeData.mode);
-        }
-
+        currentCodeData = codeData;
     };
 
     initCodeMirror = function(id) {
@@ -58,7 +71,7 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
                 self.onBlur(value);
             });
         }
-    }
+    };
 
 };
 

@@ -37,6 +37,7 @@ import org.json.JSONException;
 public class CodeMirror extends AbstractJavaScriptComponent{
     private static int componentCount = 0;
     
+    private CodeMirrorData codeMirrorData;
     private String codeValue;
     private final int componentId;
     
@@ -44,8 +45,16 @@ public class CodeMirror extends AbstractJavaScriptComponent{
     
     public CodeMirror() {
         super();
+        
         componentId = componentCount;
         componentCount++;
+        
+        CodeMirrorData codeMirrorData = new CodeMirrorData();
+        codeMirrorData.id = componentId;
+        codeMirrorData.mode = "javascript";
+        codeMirrorData.theme = "default";
+        codeMirrorData.code = "//start to code";
+        
         addFunction("onBlur", new JavaScriptFunction() {
 
             @Override
@@ -56,33 +65,34 @@ public class CodeMirror extends AbstractJavaScriptComponent{
                 }
             }
         });
+        getState().codeData = codeMirrorData;
     }
     
     
     
     public void setCode(String value) {
         codeValue = value;
-        CodeMirrorData data = new CodeMirrorData();
-        data.code = value;
-        data.id = componentId;
-        data.state = "LOAD";
-        getState().codeData = data;
+
+        getState().codeData.code = value;
+        getState().codeData.id = componentId;
+        getState().codeData.state = "LOAD";
+
     }
     
     public void setTheme(CodeMirrorTheme codeMirrorTheme) {
-        CodeMirrorData data = new CodeMirrorData();
-        data.state = "THEME";
-        data.id = componentId;
-        data.theme = codeMirrorTheme.getThemeName();
-        getState().codeData = data;
+
+        getState().codeData.state = "THEME";
+        getState().codeData.id = componentId;
+        getState().codeData.theme = codeMirrorTheme.getThemeName();
+
     }
     
     public void setLanguage(CodeMirrorLanguage codeMirrorLanguage) {
-        CodeMirrorData data = new CodeMirrorData();
-        data.state = "MODE";
-        data.id = componentId;
-        data.mode = codeMirrorLanguage.getLanguageName();
-        getState().codeData = data;
+
+        getState().codeData.state = "MODE";
+        getState().codeData.id = componentId;
+        getState().codeData.mode = codeMirrorLanguage.getLanguageName();
+
     }
     
     public String getCode() {
