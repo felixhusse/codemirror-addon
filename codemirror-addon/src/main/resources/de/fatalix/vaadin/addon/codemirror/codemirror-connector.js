@@ -38,11 +38,15 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
             if (currentCodeData.mode != codeData.mode) {
                 codemirror.setOption("mode", codeData.mode);
             }
+            if (currentCodeData.width != codeData.width || currentCodeData.height != codeData.height) {
+            	 codemirror.setSize(codeData.width,codeData.height);
+            }
         }
         else {
             codemirror.setValue(codeData.code);
             codemirror.setOption("theme", codeData.theme);
             codemirror.setOption("mode", codeData.mode);
+            codemirror.setSize(codeData.width,codeData.height);
         }
         currentCodeData = codeData;
     };

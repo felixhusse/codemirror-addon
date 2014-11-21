@@ -68,7 +68,30 @@ public class CodeMirror extends AbstractJavaScriptComponent{
         getState().codeData = codeMirrorData;
     }
     
+    @Override
+    public void setWidth(String width) {
+        super.setWidth(width);
+        getState().codeData.width = width;
+    }
+
+    @Override
+    public void setHeight(String height) {
+        super.setHeight(height);
+        getState().codeData.height = height;
+    }
     
+    @Override
+    public void setHeight(float height, Unit unit) {
+        super.setHeight(height, unit);
+        getState().codeData.height = height + unit.getSymbol();
+    }
+
+    @Override
+    public void setWidth(float width, Unit unit) {
+        super.setWidth(width, unit);
+        getState().codeData.width = width + unit.getSymbol();
+
+    }
     
     public void setCode(String value) {
         codeValue = value;

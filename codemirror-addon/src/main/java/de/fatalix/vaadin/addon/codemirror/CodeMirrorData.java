@@ -16,14 +16,18 @@
 
 package de.fatalix.vaadin.addon.codemirror;
 
+import java.io.Serializable;
+
 /**
  *
  * @author felix
  */
-public class CodeMirrorData {
+public class CodeMirrorData implements Serializable {
     public String state;
     public String theme = "default";
     public String mode = "javascript";
     public String code = "//please start to code";
+    public String height = "600";
+    public String width = "600";
     public int id;
 }
