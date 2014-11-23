@@ -60,7 +60,8 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
 - switched to version 1.0.0 as it is now in production use in our company
 
 ## Roadmap
-
+- adding autocompletion addon
+- integrating [LINT addon](http://codemirror.net/doc/manual.html#addon_lint)
 
 ## Issue tracking
 
