@@ -49,15 +49,22 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
 
 ## Release notes
 
-### Version 0.9.0-SNAPSHOT
+### Version 0.9.1
 - 
+
+### Version 0.9.2
+- refactored project layout -> removed codemirror-addon from parent, had trouble adding to Vaadin Directory
+
+### Version 1.0.0
+- Height Issue fixed (#2 & #3)
+- switched to version 1.0.0 as it is now in production use in our company
 
 ## Roadmap
 
 
 ## Issue tracking
 
-The issues for this add-on are tracked on [github.com](https://github.com/elomagic/network-graph/issues). All bug reports and feature requests are appreciated.
+The issues for this add-on are tracked on [github.com](https://github.com/felixhusse/codemirror-addon/issues). All bug reports and feature requests are appreciated.
 
 ## Contributions
 
