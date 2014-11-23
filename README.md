@@ -50,7 +50,7 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
 ## Release notes
 
 ### Version 0.9.1
-- 
+- onBlur event added
 
 ### Version 0.9.2
 - refactored project layout -> removed codemirror-addon from parent, had trouble adding to Vaadin Directory
