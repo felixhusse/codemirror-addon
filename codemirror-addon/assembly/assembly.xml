@@ -19,6 +19,7 @@
         <fileSet>
             <directory>..</directory>
             <includes>
+                <include>CODEMIRROR-LICENSE</include>
                 <include>LICENSE.txt</include>
                 <include>README.md</include>
             </includes>

@@ -10,7 +10,7 @@ CodeMirror is an UI component add-on for Vaadin 7 based on the CodeMirror Java S
 
 ## Building and running demo
 
-git clone <url of the NetworkGraph repository>
+git clone <url of the CodeMirror repository>
 mvn clean install
 cd demo
 mvn jetty:run
@@ -77,7 +77,7 @@ Contributions are welcome, but there are no guarantees that they are accepted as
 - Comment on the original issue that you have implemented a fix for it
 
 ## License & Author
-
+([CodeMirror](http://codemirror.net)) is distributed under MIT License by Marijn Haverbeke <marijnh@gmail.com> and others. For license terms, see CODEMIRROR-LICENSE
 Add-on is distributed under Apache License 2.0. For license terms, see LICENSE.txt.
 
 
