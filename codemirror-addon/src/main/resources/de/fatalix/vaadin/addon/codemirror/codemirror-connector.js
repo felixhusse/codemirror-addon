@@ -18,6 +18,7 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
     var e = this.getElement();
     var self = this;
     var currentCodeData;
+    var server;
     
     this.onStateChange = function() {
         var state = this.getState();
@@ -53,6 +54,22 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
 
     initCodeMirror = function(id) {
         if (typeof codemirror === 'undefined') {
+            getURL("http://ternjs.net/defs/ecma5.json", function(err, code) {
+                if (err) throw new Error("Request for ecma5.json: " + err);
+                console.warn("Loading TernServer with");
+                server = new CodeMirror.TernServer({defs: [JSON.parse(code)]});
+                console.warn("Setting extra Keys..");
+                codemirror.setOption("extraKeys", {
+                  "Ctrl-Space": function(cm) { server.complete(cm); },
+                  "Ctrl-I": function(cm) { server.showType(cm); },
+                  "Alt-.": function(cm) { server.jumpToDef(cm); },
+                  "Alt-,": function(cm) { server.jumpBack(cm); },
+                  "Ctrl-Q": function(cm) { server.rename(cm); },
+                  "Ctrl-.": function(cm) { server.selectName(cm); }
+                });
+                codemirror.on("cursorActivity", function(cm) { server.updateArgHints(cm); });
+              });
+            
             e.innerHTML = e.innerHTML + "<div id='cm-addon-" + id + "'></div>";
             codemirror = CodeMirror(document.getElementById('cm-addon-' + id), {
                 value: "",
@@ -69,13 +86,26 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
                     }
                 }
             });
-
+            
             codemirror.on("blur", function() {
                 var value = codemirror.getValue();
                 self.onBlur(value);
             });
         }
     };
-
+    
+    function getURL(url, c) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", url, true);
+        xhr.send();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState != 4) return;
+          if (xhr.status < 400) return c(null, xhr.responseText);
+          var e = new Error(xhr.responseText || "No response");
+          e.status = xhr.status;
+          c(e);
+        };
+      }
+    
 };
 
