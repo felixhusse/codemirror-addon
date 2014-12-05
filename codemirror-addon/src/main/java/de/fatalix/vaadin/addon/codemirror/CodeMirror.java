@@ -30,10 +30,9 @@ import org.json.JSONException;
  *
  * @author felix.husse
  */
-@JavaScript({"vaadin://codemirror/codemirror-compressed.js","codemirror-connector.js"})
-@StyleSheet({"vaadin://codemirror/codemirror.css",
-    "vaadin://codemirror/theme/themes.css",
-    "vaadin://codemirror/fullscreen.css"})
+@JavaScript({"vaadin://codemirror/codemirror-4.8-compressed.js","codemirror-connector.js"})
+@StyleSheet({"vaadin://codemirror/codemirror.css","vaadin://codemirror/theme/themes.css",
+    "vaadin://codemirror/fullscreen.css","vaadin://codemirror/tern.css","vaadin://codemirror/dialog.css"})
 public class CodeMirror extends AbstractJavaScriptComponent{
     private static int componentCount = 0;
     
