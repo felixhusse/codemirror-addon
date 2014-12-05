@@ -56,9 +56,7 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
         if (typeof codemirror === 'undefined') {
             getURL("http://ternjs.net/defs/ecma5.json", function(err, code) {
                 if (err) throw new Error("Request for ecma5.json: " + err);
-                console.warn("Loading TernServer with");
                 server = new CodeMirror.TernServer({defs: [JSON.parse(code)]});
-                console.warn("Setting extra Keys..");
                 codemirror.setOption("extraKeys", {
                   "Ctrl-Space": function(cm) { server.complete(cm); },
                   "Ctrl-I": function(cm) { server.showType(cm); },
