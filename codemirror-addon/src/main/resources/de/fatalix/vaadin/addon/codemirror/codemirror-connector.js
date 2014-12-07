@@ -54,19 +54,7 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
 
     initCodeMirror = function(id) {
         if (typeof codemirror === 'undefined') {
-            getURL("http://ternjs.net/defs/ecma5.json", function(err, code) {
-                if (err) throw new Error("Request for ecma5.json: " + err);
-                server = new CodeMirror.TernServer({defs: [JSON.parse(code)]});
-                codemirror.setOption("extraKeys", {
-                  "Ctrl-Space": function(cm) { server.complete(cm); },
-                  "Ctrl-I": function(cm) { server.showType(cm); },
-                  "Alt-.": function(cm) { server.jumpToDef(cm); },
-                  "Alt-,": function(cm) { server.jumpBack(cm); },
-                  "Ctrl-Q": function(cm) { server.rename(cm); },
-                  "Ctrl-.": function(cm) { server.selectName(cm); }
-                });
-                codemirror.on("cursorActivity", function(cm) { server.updateArgHints(cm); });
-              });
+            
             
             e.innerHTML = e.innerHTML + "<div id='cm-addon-" + id + "'></div>";
             codemirror = CodeMirror(document.getElementById('cm-addon-' + id), {
@@ -89,6 +77,20 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
                 var value = codemirror.getValue();
                 self.onBlur(value);
             });
+            
+            getURL("http://ternjs.net/defs/ecma5.json", function(err, code) {
+                if (err) throw new Error("Request for ecma5.json: " + err);
+                server = new CodeMirror.TernServer({defs: [JSON.parse(code)]});
+                codemirror.setOption("extraKeys", {
+                  "Ctrl-Space": function(cm) { server.complete(cm); },
+                  "Ctrl-I": function(cm) { server.showType(cm); },
+                  "Alt-.": function(cm) { server.jumpToDef(cm); },
+                  "Alt-,": function(cm) { server.jumpBack(cm); },
+                  "Ctrl-Q": function(cm) { server.rename(cm); },
+                  "Ctrl-.": function(cm) { server.selectName(cm); }
+                });
+                codemirror.on("cursorActivity", function(cm) { server.updateArgHints(cm); });
+              });
         }
     };
     
