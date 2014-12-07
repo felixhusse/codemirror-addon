@@ -120,6 +120,11 @@ public class CodeMirror extends AbstractJavaScriptComponent{
 
     }
     
+    public void setTernMode(boolean ternMode) {
+        getState().codeData.state = "Tern";
+        getState().codeData.ternEnabled = ternMode;
+    }
+    
     public String getCode() {
         return codeValue;
     }

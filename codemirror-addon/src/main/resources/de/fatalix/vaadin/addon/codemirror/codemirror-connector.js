@@ -36,6 +36,11 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
             if (currentCodeData.theme != codeData.theme) {
                 codemirror.setOption("theme", codeData.theme);
             }
+            if (currentCodeData.ternEnabled !== codeData.ternEnabled) {
+                if (codeData.ternEnabled) {
+                    
+                }
+            }
             if (currentCodeData.mode != codeData.mode) {
                 codemirror.setOption("mode", codeData.mode);
             }

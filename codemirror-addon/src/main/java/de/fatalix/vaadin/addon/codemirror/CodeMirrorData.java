@@ -30,4 +30,5 @@ public class CodeMirrorData implements Serializable {
     public String height = "600";
     public String width = "600";
     public int id;
+    public boolean ternEnabled = false;
 }
