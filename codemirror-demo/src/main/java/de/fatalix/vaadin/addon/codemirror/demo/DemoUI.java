@@ -107,6 +107,22 @@ public class DemoUI extends UI {
                 }
             });
             
+            final Button ternOnOff = new Button("Enable Tern", new Button.ClickListener() {
+
+                @Override
+                public void buttonClick(Button.ClickEvent event) {
+                    if (event.getButton().getCaption().contains("Enable")) {
+                        event.getButton().setCaption("Disable Tern");
+                        codeMirror.setTernMode(true);
+                    }
+                    else {
+                        event.getButton().setCaption("Enable Tern");
+                        codeMirror.setTernMode(false);
+                    }
+                }
+            });
+            
+            
             final ComboBox themeSelect = new ComboBox(null,Arrays.asList(CodeMirrorTheme.values()));
             themeSelect.setValue(CodeMirrorTheme.DEFAULT);
             themeSelect.setImmediate(true);
@@ -133,7 +149,7 @@ public class DemoUI extends UI {
                 }
             });
             
-            HorizontalLayout buttonLayout = new HorizontalLayout(button,showCode,themeSelect,languageSelect);
+            HorizontalLayout buttonLayout = new HorizontalLayout(button,showCode,ternOnOff,themeSelect,languageSelect);
             layout.addComponents(buttonLayout,codeMirror);
             layout.setExpandRatio(codeMirror, 1.0f);
             layout.setComponentAlignment(codeMirror, Alignment.MIDDLE_CENTER);

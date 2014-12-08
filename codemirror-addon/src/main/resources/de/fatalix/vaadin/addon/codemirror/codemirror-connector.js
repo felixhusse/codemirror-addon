@@ -15,10 +15,11 @@
  */
 window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
     var codemirror;
+    var ternServer;
     var e = this.getElement();
     var self = this;
     var currentCodeData;
-    var server;
+    
     
     this.onStateChange = function() {
         var state = this.getState();
@@ -30,21 +31,16 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
     
     modifyCodeMirrorState = function(codeData) {
         if (typeof currentCodeData !== 'undefined') {
-            if (currentCodeData.code != codeData.code) {
+            if (currentCodeData.code !== codeData.code) {
                 codemirror.setValue(codeData.code);
             }
-            if (currentCodeData.theme != codeData.theme) {
+            if (currentCodeData.theme !== codeData.theme) {
                 codemirror.setOption("theme", codeData.theme);
             }
-            if (currentCodeData.ternEnabled !== codeData.ternEnabled) {
-                if (codeData.ternEnabled) {
-                    
-                }
-            }
-            if (currentCodeData.mode != codeData.mode) {
+            if (currentCodeData.mode !== codeData.mode) {
                 codemirror.setOption("mode", codeData.mode);
             }
-            if (currentCodeData.width != codeData.width || currentCodeData.height != codeData.height) {
+            if (currentCodeData.width !== codeData.width || currentCodeData.height !== codeData.height) {
             	 codemirror.setSize(codeData.width,codeData.height);
             }
         }
@@ -56,11 +52,9 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
         }
         currentCodeData = codeData;
     };
-
+    
     initCodeMirror = function(id) {
         if (typeof codemirror === 'undefined') {
-            
-            
             e.innerHTML = e.innerHTML + "<div id='cm-addon-" + id + "'></div>";
             codemirror = CodeMirror(document.getElementById('cm-addon-' + id), {
                 value: "",
@@ -82,22 +76,23 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
                 var value = codemirror.getValue();
                 self.onBlur(value);
             });
-            
             getURL("http://ternjs.net/defs/ecma5.json", function(err, code) {
                 if (err) throw new Error("Request for ecma5.json: " + err);
-                server = new CodeMirror.TernServer({defs: [JSON.parse(code)]});
+                ternServer = new CodeMirror.TernServer({defs: [JSON.parse(code)]});
                 codemirror.setOption("extraKeys", {
-                  "Ctrl-Space": function(cm) { server.complete(cm); },
-                  "Ctrl-I": function(cm) { server.showType(cm); },
-                  "Alt-.": function(cm) { server.jumpToDef(cm); },
-                  "Alt-,": function(cm) { server.jumpBack(cm); },
-                  "Ctrl-Q": function(cm) { server.rename(cm); },
-                  "Ctrl-.": function(cm) { server.selectName(cm); }
+                  "Ctrl-Space": function(cm) { if(currentCodeData.ternEnabled){ternServer.complete(cm);}},
+                  "Ctrl-I": function(cm) { if(currentCodeData.ternEnabled){ternServer.showType(cm);} },
+                  "Alt-.": function(cm) { if(currentCodeData.ternEnabled){ternServer.jumpToDef(cm);} },
+                  "Alt-,": function(cm) { if(currentCodeData.ternEnabled){ternServer.jumpBack(cm);} },
+                  "Ctrl-Q": function(cm) { if(currentCodeData.ternEnabled){ternServer.rename(cm);} },
+                  "Ctrl-.": function(cm) { if(currentCodeData.ternEnabled){ternServer.selectName(cm);} }
                 });
-                codemirror.on("cursorActivity", function(cm) { server.updateArgHints(cm); });
+                codemirror.on("cursorActivity", function(cm) { if(currentCodeData.ternEnabled){ternServer.updateArgHints(cm);} });
               });
         }
     };
+    
+    
     
     function getURL(url, c) {
         var xhr = new XMLHttpRequest();
