@@ -52,6 +52,33 @@ public class DemoUI extends UI {
                                                 "  return find(1, \"1\");\n" +
                                                 "}";
     
+    private static final String shortcutInfo = "+++++ Shortcuts +++++++++++++++++++++++\n"
+                                             + "F11 \n"
+                                             + "   Fullscreen\n"
+                                             + "Ctrl-F \n"
+                                             + "    Search\n"
+                                             + "Ctrl-G \n"
+                                             + "    Find next\n"
+                                             + "Shift-Ctrl-G \n"
+                                             + "    Find previous\n"
+                                             + "Shift-Ctrl-F \n"
+                                             + "    Replace\n"
+                                             + "Shift-Ctrl-R \n"
+                                             + "    Replace all\n"
+                                             + "+++++ TERN Integration +++++++++++++++++++++++\n"
+                                             + "Ctrl-Space \n"
+                                             + "    Autocomplete\n"
+                                             + "Ctrl-I \n"   
+                                             + "    Find type at cursor\n"
+                                             + "Alt-. \n"   
+                                             + "    Jump to definition (Alt-, to jump back)\n"
+                                             + "Ctrl-Q \n"   
+                                             + "    Rename variable\n"
+                                             + "Ctrl-. \n"   
+                                             + "    Select all occurrences of a variable\n"
+    
+    ;
+                                             
     private boolean changeFlag = false;
     
     @WebServlet(value = "/*", asyncSupported = true)
@@ -150,9 +177,18 @@ public class DemoUI extends UI {
             });
             
             HorizontalLayout buttonLayout = new HorizontalLayout(button,showCode,ternOnOff,themeSelect,languageSelect);
-            layout.addComponents(buttonLayout,codeMirror);
-            layout.setExpandRatio(codeMirror, 1.0f);
-            layout.setComponentAlignment(codeMirror, Alignment.MIDDLE_CENTER);
+            
+            
+            Label label = new Label(shortcutInfo, ContentMode.PREFORMATTED);
+            label.setSizeUndefined();
+            
+            HorizontalLayout contentLayout = new HorizontalLayout(label,codeMirror);
+            contentLayout.setExpandRatio(codeMirror, 1.0f);
+            contentLayout.setWidth(100, Unit.PERCENTAGE);
+            
+            layout.addComponents(buttonLayout,contentLayout);
+            layout.setExpandRatio(contentLayout, 1.0f);
+            layout.setComponentAlignment(contentLayout, Alignment.MIDDLE_CENTER);
             layout.setSizeFull();
             
             
