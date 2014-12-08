@@ -1,11 +1,13 @@
 # CodeMirror Add-on for Vaadin 7
 
-CodeMirror is an UI component add-on for Vaadin 7 based on the CodeMirror Java Script library ([CodeMirror](http://codemirror.net)). CodeMirror version in use is 3.22.
+CodeMirror is an UI component add-on for Vaadin 7 based on the CodeMirror Java Script library ([CodeMirror](http://codemirror.net)). CodeMirror version in use is 4.8.
 
 # Features/Highlights
 - setCode & getCode (wow)
 - nearly all CodeMirror Themes included
 - F11 while focus on CodeMirror will expand to fullscreen (Fullscreen Addon)
+- Search/Replace Support
+- TernJS integration
 
 
 ## Building and running demo
@@ -13,7 +15,7 @@ CodeMirror is an UI component add-on for Vaadin 7 based on the CodeMirror Java S
 git clone <url of the CodeMirror repository>
 mvn clean install
 cd demo
-mvn jetty:run
+mvn jetty:run-war
 
 To see the demo, navigate to http://localhost:8080/
 
@@ -49,18 +51,22 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
 
 ## Release notes
 
-### Version 0.9.1
-- onBlur event added
-
-### Version 0.9.2
-- refactored project layout -> removed codemirror-addon from parent, had trouble adding to Vaadin Directory
+### Version 1.1.0
+- TernJS integrated (#4)
+- Search/Replace integrate (#5)
+- CodeMirror updated to version 4.8 (#6)
 
 ### Version 1.0.0
 - Height Issue fixed (#2 & #3)
 - switched to version 1.0.0 as it is now in production use in our company
 
+### Version 0.9.2
+- refactored project layout -> removed codemirror-addon from parent, had trouble adding to Vaadin Directory
+
+### Version 0.9.1
+- onBlur event added
+
 ## Roadmap
-- adding autocompletion addon
 - integrating [LINT addon](http://codemirror.net/doc/manual.html#addon_lint)
 
 ## Issue tracking
