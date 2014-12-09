@@ -104,7 +104,6 @@
 
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -177,6 +176,31 @@
                     <war>${project.basedir}/target/codemirror-demo-1.1.0-SNAPSHOT.war</war>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>org.simplericity.jettyconsole</groupId>
+                <artifactId>jetty-console-maven-plugin</artifactId>
+                <version>1.56</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>createconsole</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <additionalDependencies>
+                        <additionalDependency>
+                            <artifactId>jetty-console-requestlog-plugin</artifactId>
+                        </additionalDependency>
+                        <additionalDependency>
+                            <artifactId>jetty-console-startstop-plugin</artifactId>
+                        </additionalDependency>
+                    </additionalDependencies>
+                </configuration>
+            </plugin>
+            
         </plugins>
 
         <pluginManagement>
