@@ -82,7 +82,7 @@ public class DemoUI extends UI {
     private boolean changeFlag = false;
     
     @WebServlet(value = "/*", asyncSupported = true)
-    @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
+    @VaadinServletConfiguration(productionMode = true, ui = DemoUI.class)
     public static class Servlet extends VaadinServlet {
     }
 
