@@ -60,16 +60,7 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
                 value: "",
                 mode: "javascript",
                 lineNumbers: true,
-                theme: "default",
-                extraKeys: {
-                    "F11": function(cm) {
-                        cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-                    },
-                    "Esc": function(cm) {
-                        if (cm.getOption("fullScreen"))
-                            cm.setOption("fullScreen", false);
-                    }
-                }
+                theme: "default"
             });
             
             codemirror.on("blur", function() {
@@ -85,7 +76,9 @@ window.de_fatalix_vaadin_addon_codemirror_CodeMirror = function() {
                   "Alt-.": function(cm) { if(currentCodeData.ternEnabled){ternServer.jumpToDef(cm);} },
                   "Alt-,": function(cm) { if(currentCodeData.ternEnabled){ternServer.jumpBack(cm);} },
                   "Ctrl-Q": function(cm) { if(currentCodeData.ternEnabled){ternServer.rename(cm);} },
-                  "Ctrl-.": function(cm) { if(currentCodeData.ternEnabled){ternServer.selectName(cm);} }
+                  "Ctrl-.": function(cm) { if(currentCodeData.ternEnabled){ternServer.selectName(cm);} },
+                  "F11": function(cm) {cm.setOption("fullScreen", !cm.getOption("fullScreen"));},
+                  "Esc": function(cm) {if (cm.getOption("fullScreen"))cm.setOption("fullScreen", false);}
                 });
                 codemirror.on("cursorActivity", function(cm) { if(currentCodeData.ternEnabled){ternServer.updateArgHints(cm);} });
               });
