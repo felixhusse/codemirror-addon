@@ -51,6 +51,10 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
 
 ## Release notes
 
+### Version 1.1.2
+- update of Codemirror 4.9 to 5.11
+- update of Vaadin 7.1 to 7.6
+
 ### Version 1.1.0
 - TernJS integrated (#4)
 - Search/Replace integrate (#5)
