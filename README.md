@@ -1,6 +1,6 @@
 # CodeMirror Add-on for Vaadin 7
 
-CodeMirror is an UI component add-on for Vaadin 7 based on the CodeMirror Java Script library ([CodeMirror](http://codemirror.net)). CodeMirror version in use is 4.8.
+CodeMirror is an UI component add-on for Vaadin 7 based on the CodeMirror Java Script library ([CodeMirror](http://codemirror.net)). CodeMirror version in use is 5.11.
 
 # Features/Highlights
 - setCode & getCode (wow)
