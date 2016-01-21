@@ -4,7 +4,7 @@
     <groupId>de.fatalix</groupId>
     <artifactId>codemirror-addon-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.2.1</version>
+    <version>1.2.2-SNAPSHOT</version>
     <name>CodeMirror Add-on Parent Project ${project.version}</name>
 
     <modules>
@@ -23,7 +23,7 @@
         <url>git://github.com/felixhusse/codemirror-addon.git</url>
         <connection>scm:git:git://github.com/felixhusse/codemirror-addon.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:/felixhusse/codemirror-addon.git</developerConnection>
-        <tag>codemirror-addon-parent-1.2.1</tag>
+        <tag>HEAD</tag>
     </scm> 
     
     <developers>

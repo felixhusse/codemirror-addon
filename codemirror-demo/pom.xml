@@ -5,7 +5,7 @@
     <parent>
         <artifactId>codemirror-addon-parent</artifactId>
         <groupId>de.fatalix</groupId>
-        <version>1.2.1</version>
+        <version>1.2.2-SNAPSHOT</version>
     </parent>
     
     <groupId>de.fatalix</groupId>
