@@ -1,0 +1,19 @@
+PACKAGE INFO:
+
+CODEMIRROR - 4.8
+
+MODES
+==============
+clike.js
+htmlmixed.js
+javscript.js
+sql.js
+xml.js
+
+ADDONS
+==============
+dialog.js
+fullscreen.js
+search.js
+searchcursor.js
+tern.js

@@ -2,22 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <artifactId>codemirror-addon-parent</artifactId>
+        <groupId>de.fatalix</groupId>
+        <version>1.2.1-SNAPSHOT</version>
+    </parent>
+    
     <groupId>de.fatalix</groupId>
     <artifactId>codemirror-demo</artifactId>
     <packaging>war</packaging>
     <name>Codemirror Add-on Demo ${project.version}</name>
-	
-    <parent>
-        <artifactId>codemirror-addon-parent</artifactId>
-        <groupId>de.fatalix</groupId>
-        <version>1.1.1</version>
-    </parent>
-	
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <vaadin.version>7.3.5</vaadin.version>
-        <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
-    </properties>
 
     <licenses>
         <license>
@@ -60,46 +55,35 @@
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-server</artifactId> 
-            <version>${vaadin.version}</version>           
+            <artifactId>vaadin-server</artifactId>   
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-shared</artifactId>    
-            <version>${vaadin.version}</version>        
+            <artifactId>vaadin-shared</artifactId>       
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-themes</artifactId>
-            <version>${vaadin.version}</version>            
+            <artifactId>vaadin-themes</artifactId>      
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-client-compiled</artifactId>   
-            <version>${vaadin.version}</version>         
+            <artifactId>vaadin-client-compiled</artifactId>     
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.3</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>codmirror-addon</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-maven-plugin</artifactId>
-            <version>9.3.0.M0</version>
-            <scope>provided</scope>
-        </dependency>
+       
     </dependencies>
 
     <build>
@@ -176,7 +160,11 @@
                     <war>${project.basedir}/target/codemirror-demo-1.1.0-SNAPSHOT.war</war>
                 </configuration>
             </plugin>
-            
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.1.0.Alpha1</version>
+            </plugin>
             <plugin>
                 <groupId>org.simplericity.jettyconsole</groupId>
                 <artifactId>jetty-console-maven-plugin</artifactId>

@@ -5,7 +5,7 @@
     <groupId>de.fatalix</groupId>
     <artifactId>codemirror-addon-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.1.1</version>
+    <version>1.2.1-SNAPSHOT</version>
     <name>CodeMirror Add-on Parent Project ${project.version}</name>
 
     <modules>
@@ -13,25 +13,19 @@
         <module>codemirror-demo</module>
     </modules>
     
-    <organization>
-        <name>fatalix</name>
-        <url>https://github.com/elomagic/network-graph/</url>
-    </organization>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <vaadin.version>7.6.1</vaadin.version>
+        <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
+    </properties>
+    
     
     <scm>
-       <url>scm:git:ssh://github.com/felixhusse/codemirror-addon.git</url>
-      <connection>scm:git:ssh://git@github.com/felixhusse/codemirror-addon.git</connection>
-      <developerConnection>scm:git:https://github.com/felixhusse/codemirror-addon.git</developerConnection>
-      <tag>HEAD</tag>
-    </scm>
-    
-    <distributionManagement>
-        <repository>
-            <id>internal.repo</id>
-            <name>Temporary Staging Repository</name>
-            <url>file://${project.build.directory}/mvn-repo</url>
-        </repository>
-    </distributionManagement>
+        <url>git://github.com/felixhusse/codemirror-addon.git</url>
+        <connection>scm:git:git://github.com/felixhusse/codemirror-addon.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:/felixhusse/codemirror-addon.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm> 
     
     <developers>
         <developer>
@@ -52,6 +46,72 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-server</artifactId>
+                <version>${vaadin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-client</artifactId>
+                <version>${vaadin.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-shared</artifactId>    
+                <version>${vaadin.version}</version>        
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-themes</artifactId>
+                <version>${vaadin.version}</version>            
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-client-compiled</artifactId>   
+                <version>${vaadin.version}</version>         
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.0.1</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>2.3</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.1</version>
+            </plugin>
+        </plugins>  
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh-external</artifactId>
+                <version>1.0</version>
+            </extension>
+        </extensions>
+    </build>
+    
+     <distributionManagement>
+        <repository>
+            <id>release</id>
+            <name>release</name>
+            <url>file:C:/release/</url>
+        </repository>
+    </distributionManagement>
     
 </project>

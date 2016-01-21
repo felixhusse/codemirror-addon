@@ -85,3 +85,4 @@
     return node.commentsBefore = exports.commentsBefore(text, node.start);
   };
 });
+

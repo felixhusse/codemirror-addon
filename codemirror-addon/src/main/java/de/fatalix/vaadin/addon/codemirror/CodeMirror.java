@@ -16,21 +16,21 @@
 
 package de.fatalix.vaadin.addon.codemirror;
 
+import com.google.gwt.json.client.JSONException;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.JavaScriptFunction;
+import elemental.json.JsonArray;
 import java.util.ArrayList;
 import java.util.List;
-import org.json.JSONArray;
-import org.json.JSONException;
 
 /**
  *
  * @author felix.husse
  */
-@JavaScript({"vaadin://codemirror/codemirror-4.8-compressed.js","codemirror-connector.js","vaadin://codemirror/addons/show-hint.js",
+@JavaScript({"vaadin://codemirror/codemirror-5.11-compressed.js","codemirror-connector.js","vaadin://codemirror/addons/show-hint.js",
     "vaadin://codemirror/tern/acorn.js","vaadin://codemirror/tern/acorn_loose.js","vaadin://codemirror/tern/walk.js",
     "vaadin://codemirror/tern/polyfill.js","vaadin://codemirror/tern/signal.js","vaadin://codemirror/tern/tern.js",
     "vaadin://codemirror/tern/def.js","vaadin://codemirror/tern/comment.js","vaadin://codemirror/tern/infer.js","vaadin://codemirror/tern/doc_comment.js"})
@@ -60,7 +60,7 @@ public class CodeMirror extends AbstractJavaScriptComponent{
         addFunction("onBlur", new JavaScriptFunction() {
 
             @Override
-            public void call(JSONArray arguments) throws JSONException {
+            public void call(JsonArray arguments) throws JSONException {
                 codeValue = arguments.getString(0);
                 for (FieldEvents.BlurListener listener : blurListeners) {
                     listener.blur(new FieldEvents.BlurEvent(CodeMirror.this));
