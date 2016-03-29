@@ -2,21 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
-    <parent>
-        <artifactId>codemirror-addon-parent</artifactId>
-        <groupId>de.fatalix</groupId>
-        <version>1.2.2-SNAPSHOT</version>
-    </parent>
-    
     <groupId>de.fatalix</groupId>
     <artifactId>codmirror-addon</artifactId>
+    <version>1.2.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Codemirror Add-on</name>
     <description>Codemirror Add-on for Vaadin 7 based on the "Codemirror" Java Script library</description>
 
-
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <vaadin.version>7.6.1</vaadin.version>
+        <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
         <!-- ZIP Manifest fields -->
         <Implementation-Version>${project.version}</Implementation-Version>
         <!-- Must not change this because of the Directory -->
@@ -60,10 +57,12 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-server</artifactId>
+            <version>${vaadin.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-client</artifactId>
+            <version>${vaadin.version}</version>
             <scope>provided</scope>
         </dependency>
             
