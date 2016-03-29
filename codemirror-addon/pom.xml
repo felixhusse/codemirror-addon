@@ -4,7 +4,7 @@
     
     <groupId>de.fatalix</groupId>
     <artifactId>codmirror-addon</artifactId>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.2.2</version>
     <packaging>jar</packaging>
 
     <name>Codemirror Add-on</name>
